@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+/**
+ * Generates CommonJS idomatic modules from Babel transpiled
+ * ES6 modules
+ */
+
+'use strict'
+
+const fs = require('fs')
+const path = require('path')
+
+const modules = fs.readdirSync(__dirname + '/src')
+    .map((name) => path.basename(name, '.js'))
+const index = [
+  "'use strict'",
+  "module.exports = {",
+  modules.map((name) => `  ${name}: commonify(require('./lib/${name}')),`).join('\n'),
+  "}",
+  commonify.toString(),
+].join('\n') + '\n'
+
+function commonify (module) {
+  Object.defineProperty(module.default, '__esModule', {
+    value: true
+  })
+  return Object.keys(module).reduce((result, prop) => {
+    if (prop !== 'default')
+      Object.defineProperty(result, prop, {value: module[prop]})
+    return result
+  }, module.default)
+}
+
+process.stdout.write(index)

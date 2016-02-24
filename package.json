@@ -1,0 +1,35 @@
+{
+  "name": "util-01000101",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Utility function grab bag 01000101",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "npm run test",
+    "clean": "rm -Rf lib",
+    "build": "babel src -d lib",
+    "test": "npm run indexgen && npm run clean && npm run build && tape test/*.js",
+    "indexgen": "./indexgen > index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sfrdmn/util-01000101.git"
+  },
+  "engines": {
+    "node": ">= 4.0"
+  },
+  "keywords": [
+    "practical"
+  ],
+  "author": "Sean Fridman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sfrdmn/util-01000101/issues"
+  },
+  "homepage": "https://github.com/sfrdmn/util-01000101#readme",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "6.5.0",
+    "tape": "^4.4.0"
+  }
+}
