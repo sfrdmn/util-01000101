@@ -14,7 +14,7 @@ const modules = fs.readdirSync(__dirname + '/src')
 const index = [
   "'use strict'",
   "module.exports = {",
-  modules.map((name) => `  ${name}: commonify(require('./lib/${name}')),`).join('\n'),
+  modules.map((name) => `  ${name}: commonify(require('./${name}')),`).join('\n'),
   "}",
   commonify.toString(),
 ].join('\n') + '\n'

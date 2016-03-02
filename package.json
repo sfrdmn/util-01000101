@@ -4,11 +4,12 @@
   "private": true,
   "description": "Utility function grab bag 01000101",
   "main": "index.js",
+  "files": ["*.js"],
   "scripts": {
     "prepublish": "npm run test",
-    "clean": "rm -Rf lib",
-    "build": "babel src -d lib",
-    "test": "npm run indexgen && npm run clean && npm run build && tape test/*.js",
+    "clean": "rm -Rf *.js",
+    "build": "babel src -d .",
+    "test": "npm run clean && npm run build && npm run indexgen && tape test/*.js",
     "indexgen": "./indexgen > index.js"
   },
   "repository": {
